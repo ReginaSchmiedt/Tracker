@@ -1,11 +1,11 @@
 import questionary
 import datetime
-from db import get_db, get_habit_data, add_habit, get_all_habit_data
+from db import get_db, get_habit_data, add_habit, get_all_habit_data, check_habit
 #from counter import Counter
-from analyse import calculate_count
 from habit import habit
-#from prettytable import ALL, FRAME
-#
+#from analyse import calculate_count
+
+
 # """
 # class habit:
 # A class used to represent habits
@@ -119,10 +119,11 @@ def cli():
             ).ask()
             if option == "Check":
                 # enter the date and time
-                print(get_all_habit_data(db, "name", "frequency", "unit"), "\n") # this function is not correct. I need a function that give me a list with all names of habits that the user creats. This function should be defined in the db.py and called at main.py (here).
+                #print(get_all_habit_data(db, "name", "frequency", "unit"), "\n") # this function is not correct. I need a function that give me a list with all names of habits that the user creats. This function should be defined in the db.py and called at main.py (here).
 
-
-                check_habit = input("Enter the name of the habit you want to check: ")
+                get_all_habit_data(db)
+                get_habit_name = input("Enter the name of the habit you want to check: ")
+                check_habit(db, get_habit_name)
 
                 pass
             elif option == "Edit":
@@ -140,7 +141,9 @@ def cli():
 # The system offers to the user the option “Analyze”, to evaluate his progress.
 
         elif choice == "Analyse":
-
+            get_all_habit_data(db)
+            get_habit_name = input("Enter the name of the habit you want to display: ")
+            get_habit_data(db, get_habit_name)
 # Table that show all the analyses
             pass
 
