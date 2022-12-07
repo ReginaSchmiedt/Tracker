@@ -23,8 +23,8 @@ def create_tables(db):
 
     cur.execute("""CREATE TABLE IF NOT EXISTS tracker (
          date TEXT,
-         habitName TEXT,
-         FOREIGN KEY (habitName) REFERENCES habits(name))""") #it takes information date and habit names and organise in columns for the check and analyse.
+         habit_name TEXT,
+         FOREIGN KEY (habit_name) REFERENCES habits(name))""") #it takes information date and habit names and organise in columns for the check and analyse.
 
     db.commit()
 
@@ -79,8 +79,15 @@ def get_all_habit_data(db):#editei isso
 
 def get_habit_data(db, name):#we are not using this
     cur = db.cursor()
-    cur.execute("SELECT * FROM tracker WHERE habitName=?", (name,))
+    cur.execute("SELECT * FROM tracker WHERE habit_name=?", (name,))
     mytable = from_db_cursor(cur)
     mytable.align = "l"
     print(mytable)
     return cur.fetchall()
+
+def delete_habit(db, name):
+    cur = db.cursor()
+    cur.execute("DELETE FROM tracker WHERE habit_name=?", (name,))
+    cur.execute("DELETE FROM habits WHERE name=?", (name,))
+
+# #print("I just deleted", con.execute("DELETE FROM lang").rowcount, "rows")

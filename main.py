@@ -1,8 +1,9 @@
 import questionary
 import datetime
-from db import get_db, get_habit_data, add_habit, get_all_habit_data, check_habit
+from db import get_db, get_habit_data, add_habit, get_all_habit_data, check_habit, delete_habit
 #from counter import Counter
 from habit import habit
+
 #from analyse import calculate_count
 
 
@@ -131,6 +132,11 @@ def cli():
                 pass
 
             elif option == "Delete":
+                get_all_habit_data(db)
+                get_habit_name = input("Enter the name of the habit you want to delete: ")
+
+                delete_habit(db, get_habit_name)
+
 # The user can delete habits.
                 pass
 
