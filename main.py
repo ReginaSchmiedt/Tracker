@@ -1,7 +1,7 @@
 import questionary
 import datetime
-from db import get_db, get_habit_data, add_habit, get_all_habit_data, check_habit, delete_habit, update_habit, get_names, get_sameunit
-from analyse import streak_lenght
+from db import get_db, get_habit_data, add_habit, get_all_habit_data, , delete_habit, update_habit, get_names, get_sameunit
+from analyse import longest_streak_of_habcheck_habitit, longest_streak_of_all
 from habit import habit
 
 #from analyse import calculate_streak
@@ -42,7 +42,7 @@ the unit or period of the frequency that the user does a habit (daily, weekly, m
 
 
 def cli():
-    db = get_db()
+    db = get_db(name="example.db") #conecting to example.db
     question = questionary.confirm("Hello, you are welcome! Are you ready?").ask()
     """
     First step: the system welcome the user.
