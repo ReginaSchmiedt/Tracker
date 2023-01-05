@@ -1,2 +1,9 @@
 pytest
 questionary
+sqlite3
+datetime
+prettytable
+numpy
+random
+dateutil
+pandas
