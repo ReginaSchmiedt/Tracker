@@ -1,4 +1,5 @@
 from db import add_habit
+from datetime import datetime
 
 """
 class habit:
@@ -22,7 +23,7 @@ class habit:
         self.checks = []
 
     def check(self):
-        self.checks.append(datetime.date.today())
+        self.checks.append(datetime.now())
 
     def store(self, db):
         add_habit(db, self.name, self.frequency, self.unit)

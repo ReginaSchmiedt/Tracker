@@ -1,7 +1,7 @@
 import questionary
 import datetime
-from db import get_db, get_habit_data, add_habit, get_all_habit_data, , delete_habit, update_habit, get_names, get_sameunit
-from analyse import longest_streak_of_habcheck_habitit, longest_streak_of_all
+from db import get_db, get_habit_data, add_habit, get_all_habit_data, check_habit, delete_habit, update_habit, get_names, get_sameunit, get_names_list
+from analyse import longest_streak_of_habit, longest_streak_of_all
 from habit import habit
 
 #from analyse import calculate_streak
@@ -224,13 +224,16 @@ def cli():
 
 
             elif option_analysis == "3. Longest run streak of all defined habits":
-                streak_lenght(db, "drive the bike")
+                print(longest_streak_of_all(db))
                 pass
 
 
-
             elif option_analysis == "4. Longest run streak for a given habit":
-
+                what_habit = questionary.select(
+                    "Which habit",
+                    choices=get_names_list(db)
+                ).ask()
+                print("Longest streak:", longest_streak_of_habit(db, what_habit))
                 pass
 
 

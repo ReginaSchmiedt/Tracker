@@ -1,12 +1,13 @@
 import datetime
 from db import get_checks, get_names, get_names_list, get_freq_unit
 import pandas as pd
+import numpy as np
 
 
 
 def longest_streak_of_habit(db, habit):
     check_list = get_checks(db, habit)
-    print(check_list)
+
     date_time_list = [datetime.datetime.strptime(date_time_str, '%Y-%m-%d %H:%M:%S') for date_time_str in
                       check_list]
     """here the for loop takes the str inside of the checkslist and the function "datetime.datetime.strptime" 
@@ -41,9 +42,9 @@ def longest_streak_of_habit(db, habit):
                 streak_ID_list.append(streak_ID_list[i - 1])
             else:
                 streak_ID_list.append(streak_ID_list[i - 1] + 1)
-    streaks_list = [check_lists, streak_ID_list]
+    streaks_list = [check_list, streak_ID_list]
     streaks_list = list(zip(*streaks_list))
-    streak = pd.DataFrame(streaks_list, columns=["checks", "streak_id"])
+    streaks = pd.DataFrame(streaks_list, columns=["checks", "streak_id"])
     streaks['streak_counter'] = streaks.groupby('streak_id').cumcount() + 1
     streaks['start_of_streak'] = streaks['streak_counter'] == 1
     streaks['end_of_streak'] = streaks['start_of_streak'].shift(-1, fill_value=True)
