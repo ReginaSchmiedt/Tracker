@@ -4,35 +4,14 @@ from db import get_db, get_habit_data, add_habit, get_all_habit_data, check_habi
 from analyse import longest_streak_of_habit, longest_streak_of_all
 from habit import habit
 
-"""
--class habit:
-A class used to represent habits
-
--Attributes:
-............
-name: str
-the name of the habit
-frequency: str
-how many times the user did an activity
-unit: str
-the unit or period of the frequency that the user does a habit (daily, weekly, monthly or annual)
-
-"""
-# class habit:
-#     def __init__(self, name, frequency, unit): #attributes
-#         self.name = str(name)
-#         self.frequency = str(frequency)
-#         self.unit = str(unit)
-#         self.checks = []
-#
-#     def check(self):
-#         self.checks.append(datetime.date.today())
-#
-#     def store(self, db):
-#         add_habit(db, self.name, self.frequency, self.unit)
 
 
 def cli():
+    """
+    all the questionaries that allows the user to interact with the system: creates, manages and analyse habits.
+
+    """
+
     db = get_db(name="main.db") #conecting to example.db
     question = questionary.confirm("Hello, you are welcome! Are you ready?").ask()
     """

@@ -6,6 +6,14 @@ import numpy as np
 
 
 def longest_streak_of_habit(db, habit):
+
+    """
+    Finds the longest streak for a habit.
+
+    :param db: an initialized sqlite3 database connection.
+    :param habit: name of the habit in DB.
+    :return: the dictionary that contains the start of the longest streak, the end and the length of it.
+    """
     check_list = get_checks(db, habit)
 
     date_time_list = [datetime.datetime.strptime(date_time_str, '%Y-%m-%d %H:%M:%S') for date_time_str in
@@ -65,6 +73,14 @@ def longest_streak_of_habit(db, habit):
     return return_value
 
 def longest_streak_of_all(db):
+
+    """
+    Finds the longest streak of all habits in a data base.
+
+    :param db: an initialized sqlite3 database connection.
+    :return: the dictionary that contains the name of the habit with the longest streak, the start of the longest streak, the end and the length of it.
+    """
+
     list_names = get_names_list(db)  # I am defining a variable and calling the function
     streak_lengths = []
     streaks_start_end = []
@@ -76,29 +92,8 @@ def longest_streak_of_all(db):
     longest_all = np.argmax(np.array(streak_lengths))
     return {'habit': list_names[longest_all], 'streak_start': streaks_start_end[longest_all][0], 'streak_end': streaks_start_end[longest_all][1], 'length':
             streak_lengths[longest_all]}
-    #
-    # streak_length = streaks['streak_counter']
-    # print(streak_length)
 
 
 
 
-#ToDo:
-# write a function that take all names of all habits and put them into a list.DONE!
-#Then with a loop we can go through this list.DONE!
-#And read the checks of each habit.DONE!
-# From this checks we calculate the streaks lengths and find the longest one. THIS WE NEED TO DO
-
-# from db import get_counter_data
 #
-# def calculate_count(db, counter):
-#     """
-#     Calculate the counter of the counter.
-#
-#     :param db: an initialized sqlite3 database connection
-#     :param counter: name of the counter present in DB
-#     :return: length of the counter increment events
-#     """
-#
-#     data = get_counter_data(db, counter)
-#     return len(data)
